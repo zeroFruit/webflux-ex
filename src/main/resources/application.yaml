@@ -8,3 +8,4 @@ spring:
     execution:
       pool:
         core-size: 100
+
