@@ -1,30 +1,16 @@
 package com.zerofruit.reactive;
 
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter;
 
 import java.util.Queue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 
 @SpringBootApplication
 @Slf4j
@@ -116,20 +102,20 @@ public class ReactiveSpringApplication {
             return "OK";
         }
 
-        @GetMapping("/emitter")
-        public ResponseBodyEmitter emitter() {
-            ResponseBodyEmitter emitter = new ResponseBodyEmitter();
-
-            Executors.newSingleThreadExecutor().submit(() -> {
-                try {
-                    for (int i = 1; i <= 50; i++) {
-                        emitter.send(String.format("<p>Stream %d </p>", i));
-                        Thread.sleep(1000);
-                    }
-                } catch (Exception e) { }
-            });
-            return emitter;
-        }
+//        @GetMapping("/emitter")
+//        public ResponseBodyEmitter emitter() {
+//            ResponseBodyEmitter emitter = new ResponseBodyEmitter();
+//
+//            Executors.newSingleThreadExecutor().submit(() -> {
+//                try {
+//                    for (int i = 1; i <= 50; i++) {
+//                        emitter.send(String.format("<p>Stream %d </p>", i));
+//                        Thread.sleep(1000);
+//                    }
+//                } catch (Exception e) { }
+//            });
+//            return emitter;
+//        }
     }
 
     public static void main(String[] args) {
